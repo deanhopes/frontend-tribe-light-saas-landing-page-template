@@ -14,9 +14,6 @@ const config: Config = {
       lg: "1200px",
     },
     extend: {
-      letterSpacing: {
-        tighter: "-0.05em",
-      },
       container: {
         center: true,
         padding: {
