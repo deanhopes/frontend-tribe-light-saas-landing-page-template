@@ -8,6 +8,9 @@ import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
 
+import Image from "next/image";
+import { twMerge } from "tailwind-merge";
+
 const testimonials = [
   {
     text: "As a seasoned designer always on the lookout for innovative tools, Framer.com instantly grabbed my attention.",
@@ -65,6 +68,65 @@ const testimonials = [
   },
 ];
 
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
+const thirdColumn = testimonials.slice(6, 9);
+
+const TestimonialsColumn = (props: {
+  className?: string;
+  testimonials: typeof testimonials;
+}) => (
+  <div className={twMerge("mt-10 flex flex-col gap-6", props.className)}>
+    {props.testimonials.map(({ text, imageSrc, name, username }) => (
+      <div
+        key={username}
+        className="border p-10 border-[#F1F1F1] rounded-3xl shadow-[0_8px_16px_#00000010] max-w-xs w-full"
+      >
+        <div>{text}</div>
+        <div className="flex gap-3 pt-5 items-center">
+          <Image
+            src={imageSrc}
+            width={40}
+            height={40}
+            alt={`${name}'s Profile Image`}
+            className="size-10"
+          />
+          <div>
+            <p className="font-bold tracking-tight leading-5">{name}</p>
+            <p className="tracking-tight leading-5  text-black/50">
+              {username}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 export const Testimonials = () => {
-  return null;
+  return (
+    <section className="bg-white py-0 overflow-x-clip">
+      <div className="container">
+        <div className="centered-content-container">
+          <div className="pill">Testimonials</div>
+          <h2 className="h2-style">What our users say</h2>
+          <p className="paragraph text-center">
+            From intuitive design to powerful features, our app has become an
+            essential tool for users around the world.
+          </p>
+        </div>
+        <div className="flex items-center justify-center gap-6 [mask-image:linear-gradient(to_top,transparent,black,black,transparent)]">
+          <TestimonialsColumn testimonials={firstColumn} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+          />
+        </div>
+      </div>
+    </section>
+  );
 };
