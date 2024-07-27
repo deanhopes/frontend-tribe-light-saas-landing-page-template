@@ -1,5 +1,5 @@
 import ArrowRight from "@/assets/arrow-right.svg";
-import Logo from "@/assets/logosaas.png";
+import logoSaaSImage from "@/assets/logosaas.png";
 import Image from "next/image";
 import MenuIcon from "@/assets/menu.svg";
 
@@ -18,7 +18,14 @@ export const Header = () => {
       <div className="py-5">
         <div className="container">
           <div className="flex items-center justify-between">
-            <Image src={Logo} alt="SaaS Logo" height={40} width={40}></Image>
+            <div className="inline-flex relative before:content-[''] before:opacity-40 before:h-full before:w-full before:bg-[linear-gradient(to_right,#FF00FF,#FF00FF,#FFFFFF,#00FFFF,#00FFFF,#FFFFFF,#00FFFF,#00FFFF,#00FFFF,#FFFFFF,#FFD700,#FFFFFF)] before:absolute before:blur-md">
+              <Image
+                src={logoSaaSImage}
+                alt="Footer Logo"
+                height={40}
+                className="relative"
+              />
+            </div>
             <MenuIcon className="h-5 w-5 md:hidden" />
             <nav className="hidden md:flex gap-6 text-black/60 items-center">
               <a href="#">About</a>
