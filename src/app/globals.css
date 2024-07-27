@@ -12,8 +12,18 @@
     @apply btn bg-black text-white;
   }
 
+  .btn-inverse {
+    @apply btn bg-white text-black;
+  }
+
   .btn-text {
     @apply btn text-black bg-transparent;
+  }
+
+  /* Layout */
+
+  .centered-content-container {
+    @apply flex flex-col items-center md:max-w-[540px] mx-auto;
   }
 
   /* Text styles */

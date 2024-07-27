@@ -6,14 +6,10 @@ import Image from "next/image";
 export const ProductShowcase = () => {
   return (
     <section className="bg-gradient-to-b from-[#ffffff] to-[#D2DCFF] py-24 overflow-x-clip">
-      <div className="container flex flex-col items-center">
-        <div className="flex flex-col items-center md:max-w-[540px]">
-          <div className="pill">
-            Boost your productivity
-          </div>
-          <h2 className="h2-style">
-            A more effective way to track progress
-          </h2>
+      <div className="container">
+        <div className="centered-content-container">
+          <div className="pill">Boost your productivity</div>
+          <h2 className="h2-style">A more effective way to track progress</h2>
           <p className="paragraph text-center">
             Effortlessly turn your ideas into a fully functional, responsive
             SaaS website in just minutes with this template.
