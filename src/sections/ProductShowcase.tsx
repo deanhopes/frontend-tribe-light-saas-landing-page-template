@@ -2,13 +2,18 @@
 import productImage from "@/assets/product-image.png";
 import pyramidImage from "@/assets/pyramid.png";
 import tubeImage from "@/assets/tube.png";
-import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useAnimation,
+  useMotionValueEvent,
+} from "framer-motion";
 
 export const ProductShowcase = () => {
   const productRef = useRef(null);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const controls = useAnimation();
 
   // For rotateX animation
   const { scrollYProgress: scrollYProgressRotate } = useScroll({
@@ -29,8 +34,25 @@ export const ProductShowcase = () => {
   );
   const rotateX = useTransform(scrollYProgressRotate, [0, 1], [90, 0]);
 
+  const animateOpacity = () => {
+    controls.start({
+      opacity: 1,
+      transition: { ease: "linear" },
+    });
+  };
+
+  useMotionValueEvent(scrollYProgressRotate, "change", (value) => {
+    if (value > 0 && value <= 1) {
+      animateOpacity();
+    }
+  });
+
   useEffect(() => {
-    setShouldAnimate(true);
+    // Check initial scroll position
+    const initialValue = scrollYProgressRotate.get();
+    if (initialValue > 0 && initialValue <= 1) {
+      animateOpacity();
+    }
   }, []);
 
   return (
@@ -52,9 +74,10 @@ export const ProductShowcase = () => {
             src={productImage.src}
             className="pt-10"
             alt={"Image of the product"}
-            initial={{ rotateX: 90 }}
+            initial={{ rotateX: 90, opacity: 0 }}
+            animate={controls}
             style={{
-              rotateX: shouldAnimate ? rotateX : 90,
+              rotateX,
             }}
           />
           <motion.img
@@ -65,7 +88,7 @@ export const ProductShowcase = () => {
             height={262}
             initial={{ y: 300 }}
             style={{
-              y: shouldAnimate ? translateY : 300,
+              y: translateY,
             }}
           />
           <motion.img
@@ -76,7 +99,7 @@ export const ProductShowcase = () => {
             height={262}
             initial={{ y: 300 }}
             style={{
-              y: shouldAnimate ? translateY : 300,
+              y: translateY,
             }}
           />
         </div>

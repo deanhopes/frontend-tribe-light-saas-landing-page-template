@@ -3,7 +3,6 @@ import ArrowRight from "@/assets/arrow-right.svg";
 import cogImage from "@/assets/cog.png";
 import cyclinderImage from "@/assets/cylinder.png";
 import noodleImage from "@/assets/noodle.png";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
