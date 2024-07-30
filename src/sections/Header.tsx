@@ -1,19 +1,32 @@
+"use client";
+import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
 import ArrowRight from "@/assets/arrow-right.svg";
 import logoSaaSImage from "@/assets/logosaas.png";
 import Image from "next/image";
 import MenuIcon from "@/assets/menu.svg";
 
 export const Header = () => {
+  const arrowControls = useAnimation();
+
   return (
     <header className="sticky top-0 backdrop-blur-sm z-20">
       <div className="flex justify-center items-center py-2 bg-black text-white text-sm gap-2">
         <p className="text-white/80 hidden md:block">
           Streamline your workflow and boost your productivity
         </p>
-        <div className="inline-flex gap-1 items-center">
-          <p>Get Started Free</p>
-          <ArrowRight className="h-4 w-4 inline-flex justify-center items-center" />
-        </div>
+        <Link href="#">
+          <motion.div
+            className="inline-flex gap-1 items-center cursor-pointer"
+            onHoverStart={() => arrowControls.start({ x: 5 })}
+            onHoverEnd={() => arrowControls.start({ x: 0 })}
+          >
+            <p>Get Started Free</p>
+            <motion.div animate={arrowControls} transition={{ duration: 0.2 }}>
+              <ArrowRight className="h-4 w-4 inline-flex justify-center items-center" />
+            </motion.div>
+          </motion.div>
+        </Link>
       </div>
       <div className="py-5">
         <div className="container">
