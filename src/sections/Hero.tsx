@@ -8,17 +8,12 @@ import { useRef, useEffect, useState } from "react";
 
 export const Hero = () => {
   const heroRef = useRef(null);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start end", "end start"],
   });
 
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
-
-  useEffect(() => {
-    setShouldAnimate(true);
-  }, []);
 
   return (
     <section
@@ -66,7 +61,7 @@ export const Hero = () => {
               height={220}
               initial={{ y: 0 }}
               style={{
-                translateY: shouldAnimate ? translateY : 0,
+                translateY: translateY,
               }}
             />
             <motion.img
@@ -77,7 +72,7 @@ export const Hero = () => {
               height={220}
               initial={{ y: 0, rotate: 30 }}
               style={{
-                translateY: shouldAnimate ? translateY : 0,
+                translateY: translateY,
                 rotate: 30,
               }}
             />
