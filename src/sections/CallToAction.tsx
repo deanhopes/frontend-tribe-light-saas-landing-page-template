@@ -12,12 +12,12 @@ export const CallToAction = () => {
     target: ctaRef,
     offset: ["start end", "end start"],
   });
-
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
-
   useEffect(() => {
     setShouldAnimate(true);
   }, []);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <section
@@ -31,12 +31,23 @@ export const CallToAction = () => {
             Celebrate the joy of accomplishment with an app designed to track
             your progress, motivate your efforts, and celebrate your successes.
           </p>
-          <div className="mt-6 flex gap-1 items-center">
+          <div className="mt-6 flex gap-4 items-center">
             <button className="btn btn-primary">Get for free</button>
-            <button className="btn btn-text gap-1">
+            <motion.button
+              className="btn btn-text gap-1"
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+            >
               <span>Learn more</span>
-              <ArrowRight className="h-5 w-5 pt-0.5" />
-            </button>
+              <motion.div
+                key={"arrow"}
+                initial={{ x: 0 }}
+                animate={{ x: isHovered ? 5 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ArrowRight className="h-5 w-5 pt-0.5" />
+              </motion.div>
+            </motion.button>
           </div>
         </div>
         <div className="relative">

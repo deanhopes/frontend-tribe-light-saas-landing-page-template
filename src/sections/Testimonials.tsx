@@ -129,7 +129,7 @@ export const Testimonials = () => {
   return (
     <section className="bg-white py-0 overflow-x-clip">
       <div className="container">
-        <div className="centered-content-container">
+        <div className="centered-content-container pb-12">
           <div className="pill">Testimonials</div>
           <h2 className="h2-style">What our users say</h2>
           <p className="paragraph text-center">
