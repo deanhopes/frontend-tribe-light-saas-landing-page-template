@@ -38,18 +38,22 @@ export const Hero = () => {
               successes.
             </p>
             <div className="mt-6 flex gap-4 items-center">
-              <button className="btn btn-primary">Get for free</button>
+              <button className="btn btn-primary" aria-label="Get for free">
+                Get for free
+              </button>
               <motion.button
-                className="btn btn-text gap-1"
+                className="btn btn-text gap-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Learn more about Pathway to productivity"
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
+                tabIndex={0} // Ensures the button is focusable via keyboard
               >
                 <span>Learn more</span>
                 <motion.div
                   key={"arrow"}
                   initial={{ x: 0 }}
-                  animate={{ x: isHovered ? 5 : 0 }}
-                  transition={{ duration: 0.2 }}
+                  animate={{ x: isHovered ? 10 : 0 }} // Increased movement for better visibility
+                  transition={{ type: "spring", stiffness: 300 }} // Smoother transition
                 >
                   <ArrowRight className="h-5 w-5 pt-0.5" />
                 </motion.div>

@@ -3,7 +3,7 @@ import ArrowRight from "@/assets/arrow-right.svg";
 import starImage from "@/assets/star.png";
 import springImage from "@/assets/spring.png";
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 
 export const CallToAction = () => {
   const ctaRef = useRef(null);
@@ -18,6 +18,26 @@ export const CallToAction = () => {
   }, []);
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const starControls = useAnimation();
+  const springControls = useAnimation();
+
+  useEffect(() => {
+    const hoverAnimation = async () => {
+      await starControls.start({
+        y: [0, -10, 0],
+        transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+      });
+    };
+    const springHoverAnimation = async () => {
+      await springControls.start({
+        y: [0, 15, 0],
+        transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+      });
+    };
+    hoverAnimation();
+    springHoverAnimation();
+  }, [starControls, springControls]);
 
   return (
     <section
@@ -58,6 +78,7 @@ export const CallToAction = () => {
             width={360}
             height={360}
             initial={{ y: 0 }}
+            animate={starControls}
             style={{
               translateY: shouldAnimate ? translateY : 0,
             }}
@@ -69,6 +90,7 @@ export const CallToAction = () => {
             width={360}
             height={360}
             initial={{ y: 0 }}
+            animate={springControls}
             style={{
               translateY: shouldAnimate ? translateY : 0,
             }}
